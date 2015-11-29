@@ -59,9 +59,12 @@ var authentication = function(req, res, next) {
 	var signature = req.query.signature;
 	var timestamp = req.query.timestamp;
 	var nonce = req.query.nonce;
+	var echostr = req.query.echostr;
 	if(isLegel(signature,timestamp,nonce,config.token))
 	{
-		res.send(signature);
+		console.log("ok");
+		res.send(echostr);
+
 	}
 	else
 	{
