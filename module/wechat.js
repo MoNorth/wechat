@@ -3,15 +3,13 @@
  */
 
 
-var crypto = require('crypto');
+require("./config");
+var access_token = require("./access_token");
 
 
-var config = {
-	app: null,
-	appid: '',
-	appsecret: '',
-	token: ''
-}
+var authentication = require("./authentication");
+
+var menu = require("./menu");
 
 /**
  * 
@@ -28,52 +26,35 @@ var wechat = function(app, appid, appsecret, token, callback) {
 	config.appid = appid;
 	config.appsecret = appsecret;
 	config.token = token;
-
+	//微信认证
 	app.get('/',authentication);
+
+
+	/**
+	 *如果你是第一次请求,需要加载下列函数,不是则可忽略
+	 */
+	access_token.getToken(function(ok,result) {
+		console.log(result);
+	});
+	/**
+	 * 加载菜单,可以忽略
+	 */
+	menu.setMenu(function(ok,result) {
+		console.log(result);
+	});
+	/**
+	 * 获取菜单
+	 */
+	// menu.getMenu(function(ok,result) {
+	// 		console.log(result);
+	// 	});
+
 
 };
 
-function isLegel(signature, timestamp, nonce, token) {
-	var array = new Array();
-	array[0] = timestamp;
-	array[1] = nonce;
-	array[2] = token;
-	array.sort();
-	var hasher = crypto.createHash("sha1");
-	var msg = array[0] + array[1] + array[2];
-	hasher.update(msg);
-	msg = hasher.digest('h<span></span>ex'); //计算SHA1值
-	console.log(msg);
-	console.log(signature);
-	if (msg === signature) {
-		return true;
-	} else {
-		return false;
-	}
-}
 
-var authentication = function(req, res, next) {
-	// //
-	//        $signature = $_GET["signature"];
-	//        $timestamp = $_GET["timestamp"];
-	//        $nonce = $_GET["nonce"];
-	//        
-	var signature = req.query.signature;
-	var timestamp = req.query.timestamp;
-	var nonce = req.query.nonce;
-	var echostr = req.query.echostr;
-	if(isLegel(signature,timestamp,nonce,config.token))
-	{
-		console.log("ok");
-		res.send(echostr);
 
-	}
-	else
-	{
-		console.log("error");
-		res.end("");
-	}
-}
+
 
 
 module.exports = wechat;
