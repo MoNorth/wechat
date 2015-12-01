@@ -20,7 +20,7 @@ function getPost(req,res,next) {
 		//e
 	}
 
-	switch(data.)
+	// switch(data.)
 
 
 
