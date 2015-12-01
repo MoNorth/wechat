@@ -22,9 +22,9 @@ var wechatapp = new wechat(app, 'wx2d99e56a3326b348', 'd4624c36b6795d1d99dcf0547
 // 	console.log(result);
 // });
 wechatapp.use("postData");
-wechatapp.text = function(ok,req,res,result) {
+wechatapp.retext(function(ok,req,res,result) {
 	console.log(result);
-}
+});
 
 
 app.listen(8080);
