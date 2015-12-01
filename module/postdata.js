@@ -7,26 +7,6 @@ var xml_bodyparser = require("express-xml-bodyparser");
 
 config.app.use(xml_bodyparser());
 
-
-
-
-
-var text = function(ok, req, res, result) {
-	console.log("text");
-	res.send("");
-}
-
-var defaultMsg = function(ok, req, res, result) {
-	console.log(result);
-	res.send("");
-}
-
-
-
-exports.text = text;
-exports.defaultMsg = defaultMsg;
-
-
 function getPost(req, res, next) {
 	if (!req.body) {
 		//e
@@ -46,10 +26,10 @@ function getPost(req, res, next) {
 
 	switch (data.msgtype[0]) {
 		case 'text':
-			exports.text(true, req, res, data);
+			text(true, req, res, data);
 			break;
 		default:
-			exports.defaultMsg(true, req, res, data);
+			defaultMsg(true, req, res, data);
 
 	}
 
@@ -58,4 +38,19 @@ function getPost(req, res, next) {
 }
 
 
+
+var text = function(ok, req, res, result) {
+	console.log("text");
+	res.send("");
+}
+
+var defaultMsg = function(ok, req, res, result) {
+	console.log(result);
+	res.send("");
+}
+
+
 config.app.post('/', getPost);
+
+exports.text = text;
+exports.defaultMsg = defaultMsg;

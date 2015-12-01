@@ -30,7 +30,7 @@ function use (fun_name,callback) {
 			var wechat = require("./wechat");
 			var extend = require("./extend");
 			var postdata = require("./postdata");
-			extend(wechat,postdata);
+			extend(wechat.prototype,postdata);
 
 			break;
 		}

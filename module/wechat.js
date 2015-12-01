@@ -31,6 +31,7 @@ var wechat = function(app, appid, appsecret, token) {
 	config.appsecret = appsecret;
 	config.token = token;
 	this.use = require('./use');
+
 };
 
 extend(wechat.prototype,access_token);
