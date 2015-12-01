@@ -27,7 +27,11 @@ function use (fun_name,callback) {
 		}
 		case 'postData':
 		{
-			require("./postdata");
+			var wechat = require("./wechat");
+			var extend = require("./extend");
+			var postdata = require("./postdata");
+			extend(wechat,postdata);
+
 			break;
 		}
 	}
