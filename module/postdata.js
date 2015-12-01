@@ -5,9 +5,15 @@
 
 var xml_bodyparser = require("express-xml-bodyparser");
 
-config.app.use(xml_bodyparser({explicitArray:false}));
+config.app.use(xml_bodyparser({explicitArray:false,trim:true}));
+
+var xml2js = require("./node_modules/express-xml-bodyparser/node_modules/xml2js");
+var buildXml = new xml.Builder();
 
 
+var jsonToXml = function(json) {
+	return buildXml.buildObject({xml:json}).replace(/<\?xml.*?\?>\s*/,"");
+}
 
 
 
@@ -19,6 +25,17 @@ var text = function(ok, req, res, result) {
 var defaultMsg = function(ok, req, res, result) {
 	console.log(result);
 	res.send("");
+}
+
+var sendText = function(data) {
+	var result = {
+		ToUserName : this.result.tousername,
+		FromUserName : this.result.fromusername,
+		CreateTime : Math.floor((new Date()).getTime()/1000),
+		MsgType : 'text',
+		Content : data
+	};
+	this.send(jsonToXml(result));
 }
 
 
@@ -47,7 +64,8 @@ function getPost(req, res, next) {
 		res.send("");
 		return;
 	}
-
+	res.result = data;
+	res.sendText = sendText;
 	switch (data.msgtype[0]) {
 		case 'text':
 			text(true, req, res, data);
