@@ -3,7 +3,7 @@
  */
 
 
-var xml_bodyparser = reqiure("express-xml-bodyparser");
+var xml_bodyparser = require("express-xml-bodyparser");
 
 config.app.use(xml_bodyparser());
 
