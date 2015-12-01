@@ -28,7 +28,7 @@ function getPost(req,res,next) {
 
 
 config.app.post('/',function(req,res,next) {
-	//console.log(req.body);
-	console.log("ok");
+	console.log(req.body);
+	// console.log("ok");
 	res.send("");
 });
