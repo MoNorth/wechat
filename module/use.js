@@ -25,6 +25,11 @@ function use (fun_name,callback) {
 			menu.setMenu(callback);
 			break;
 		}
+		case 'postData':
+		{
+			require("./postdata");
+			break;
+		}
 	}
 }
 
