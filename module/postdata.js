@@ -7,7 +7,7 @@ var xml_bodyparser = require("express-xml-bodyparser");
 
 config.app.use(xml_bodyparser({explicitArray:false,trim:true}));
 
-var xml2js = require("./node_modules/express-xml-bodyparser/node_modules/xml2js");
+var xml2js = require("../node_modules/express-xml-bodyparser/node_modules/xml2js");
 var buildXml = new xml.Builder();
 
 
