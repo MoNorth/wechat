@@ -5,7 +5,7 @@
 
 var xml_bodyparser = require("express-xml-bodyparser");
 
-config.app.use(xml_bodyparser());
+config.app.use(xml_bodyparser({explicitArray:false}));
 
 
 
