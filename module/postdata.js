@@ -28,5 +28,6 @@ function getPost(req,res,next) {
 
 
 config.app.post('/',function(req,res,next) {
-	console.log(res.body);
+	console.log(req.body);
+	res.send("");
 });
