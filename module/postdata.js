@@ -40,7 +40,7 @@ function getPost(req, res, next) {
 
 
 var text = function(ok, req, res, result) {
-	console.log(result);
+	console.log("text");
 	res.send("");
 }
 
