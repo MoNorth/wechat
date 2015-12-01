@@ -3,5 +3,6 @@ global.config = {
 	app: null,
 	appid: '',
 	appsecret: '',
-	token: ''
+	token: '',
+	access_token: {}
 }

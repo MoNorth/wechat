@@ -17,8 +17,15 @@ function getToken(callback) {
 	 * 将access_token保存进文件,方便多台服务器操作.
 	 */
 	var token = fs.readFileSync(tokenPath, "utf-8");
+	//
+	//
+	/**
+	 * 将token保存进内存
+	 */
+	// var token = config.access_token;
 	if (token)
 	{
+		// var tokenObj = token; 
 		var tokenObj = JSON.parse(token);
 		var date = (new Date()).getTime() - 0;
 		/**
@@ -68,6 +75,9 @@ function reflushToken(callback) {
 					else
 						callback(true, data.access_token);
 				});
+				// 
+				// config.access_token = JSON.stringify(tokenstr);
+				// callback(true, data.access_token);
 
 			}
 		);
