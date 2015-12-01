@@ -26,10 +26,10 @@ function getPost(req, res, next) {
 
 	switch (data.msgtype[0]) {
 		case 'text':
-			text(true, req, res, data);
+			exports.text(true, req, res, data);
 			break;
 		default:
-			defaultMsg(true, req, res, data);
+			exports.defaultMsg(true, req, res, data);
 
 	}
 
