@@ -8,18 +8,20 @@ var xml_bodyparser = require("express-xml-bodyparser");
 config.app.use(xml_bodyparser());
 
 function getPost(req, res, next) {
-	if (!res.body) {
+	if (!req.body) {
 		//e
 		console.log("no res.body");
 		res.send("");
+		return;
 	}
 
-	var data = res.body.xml;
+	var data = req.body.xml;
 
 	if (!data) {
 		//e
 		console.log("no res.body.xml");
 		res.send("");
+		return;
 	}
 
 	switch (data.msgtype[0]) {
