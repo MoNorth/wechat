@@ -23,8 +23,12 @@ var defaultMsg = function(ok, req, res, result) {
 
 
 
-exports.text = text;
-exports.defaultMsg = defaultMsg;
+exports.retext = function(callback) {
+	text = callback;
+};
+exports.redefaultMsg = function(callback) {
+	defaultMsg = callback;
+};
 
 
 function getPost(req, res, next) {
@@ -46,10 +50,10 @@ function getPost(req, res, next) {
 
 	switch (data.msgtype[0]) {
 		case 'text':
-			exports.text(true, req, res, data);
+			text(true, req, res, data);
 			break;
 		default:
-			exports.defaultMsg(true, req, res, data);
+			defaultMsg(true, req, res, data);
 
 	}
 
