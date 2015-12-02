@@ -1,4 +1,6 @@
 function use (fun_name,callback) {
+	var wechat = require("./wechat");
+	var extend = require("./extend");
 	switch(fun_name)
 	{
 		case 'authentication':
@@ -27,12 +29,17 @@ function use (fun_name,callback) {
 		}
 		case 'postData':
 		{
-			var wechat = require("./wechat");
-			var extend = require("./extend");
+			
+			
 			var postdata = require("./postdata");
 			extend(wechat.prototype,postdata);
 
 			break;
+		}
+		case 'session':
+		{
+			var session = require("./session");
+			extend(wechat.prototype,session);
 		}
 	}
 }

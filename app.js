@@ -35,4 +35,7 @@ wechatapp.retext({
 	}
 },'什么');
 
+wechatapp.use("session");
+// console.log(config.session);
+
 app.listen(8080);

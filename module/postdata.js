@@ -34,16 +34,15 @@ var sendText = function(data) {
 }
 
 
-
-exports.retext = function(callback,defaultText) {
+var changeText = function(texts,callback,defaultText) {
 	if(typeof callback === "function")
 	{
-		text = callback;
+		texts = callback;
 		return;
 	}
 	if(typeof callback === "object")
 	{
-		text =  function(ok,req,res,result) {
+		texts =  function(ok,req,res,result) {
 			if(result.content in callback)
 			{
 				if(typeof callback[result.content] === "function")
@@ -60,6 +59,12 @@ exports.retext = function(callback,defaultText) {
 					res.sendText(defaultText);
 		}
 	}
+}
+
+
+
+exports.retext = function(callback,defaultText) {
+	changeText(text,callback,defaultText);
 };
 exports.redefaultMsg = function(callback) {
 	defaultMsg = callback;
@@ -84,6 +89,11 @@ function getPost(req, res, next) {
 	}
 	res.result = data;
 	res.sendText = sendText;
+	if(config.session)
+	{
+		if(require("./session").hasSession())
+			return;
+	}
 	switch (data.msgtype) {
 		case 'text':
 			text(true, req, res, data);
