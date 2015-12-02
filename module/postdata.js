@@ -48,7 +48,7 @@ exports.retext = function(callback,defaultText) {
 			{
 				if(typeof callback[result.content] === "function")
 				{
-					callback[result.content].call(this);
+					callback[result.content].call(text);
 				}
 				else if(typeof callback[result.content] === "string")
 					res.sendText(callback[result.content]);
