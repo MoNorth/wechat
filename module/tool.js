@@ -4,7 +4,8 @@ var buildXml = new xml2js.Builder();
 
 var jsonToXml = function(json) {
 	json = addCDATA(json);
-	return buildXml.buildObject({xml:json}).replace(/<\?xml.*?\?>\s*/,"");
+	return buildXml.buildObject({xml:json}).replace(/<\?xml.*?\?>\s*/,"")
+			.replace(/&lt;/g,"<").replace(/&gt;/g,">");
 }
 
 
@@ -16,7 +17,7 @@ var addCDATA = function(obj) {
 	for(var i in obj)
 	{
 		if(typeof obj[i] !== "number")
-			obj[i] = '&lt;![CDATA[' + obj[i] + ']]&gt;';
+			obj[i] = '![CDATA[' + obj[i] + ']]';
 	}
 	return obj;
 }
