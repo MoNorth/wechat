@@ -28,7 +28,9 @@ wechatapp.use("postData");
 // });
 wechatapp.retext({
 	'你好':'你也好',
-	我们 : '我们怎么了'
+	我们 : '我们怎么了',
+	你妈逼 : '你个傻逼',
+	hello : '沙克拉克'
 },'什么');
 
 app.listen(8080);
