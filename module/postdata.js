@@ -34,15 +34,19 @@ var sendText = function(data) {
 }
 
 
-var changeText = function(texts,callback,defaultText) {
+
+
+
+
+exports.retext = function(callback,defaultText) {
 	if(typeof callback === "function")
 	{
-		texts = callback;
+		text = callback;
 		return;
 	}
 	if(typeof callback === "object")
 	{
-		texts =  function(ok,req,res,result) {
+		text =  function(ok,req,res,result) {
 			if(result.content in callback)
 			{
 				if(typeof callback[result.content] === "function")
@@ -59,12 +63,6 @@ var changeText = function(texts,callback,defaultText) {
 					res.sendText(defaultText);
 		}
 	}
-}
-
-
-
-exports.retext = function(callback,defaultText) {
-	changeText(text,callback,defaultText);
 };
 exports.redefaultMsg = function(callback) {
 	defaultMsg = callback;

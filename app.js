@@ -26,16 +26,21 @@ wechatapp.use("postData");
 // 	console.log(result);
 // 	res.sendText("nihaoya");
 // });
+// 
+wechatapp.use("session");
 wechatapp.retext({
 	'你好':'你也好',
 	我们 : '我们怎么了',
 	你妈逼 : '你个傻逼',
 	hello : function(req,res,result) {
-		res.sendText("hahahahaokla");
+		wechatapp.createSession(result,function(req,res,result) {
+			if(result.content === "你好")
+				res.sendText("我一点也不好");
+		})
 	}
 },'什么');
 
-wechatapp.use("session");
+
 // console.log(config.session);
 
 app.listen(8080);
