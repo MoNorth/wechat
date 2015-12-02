@@ -4,8 +4,8 @@ var buildXml = new xml2js.Builder();
 
 var jsonToXml = function(json) {
 	// json = addCDATA(json);
-	return buildXml.buildObject({xml:json}).replace(/<\?xml.*?\?>\s*/,"")
-			.replace(/&lt;/g,"<").replace(/&gt;/g,">");
+	return buildXml.buildObject({xml:json}).replace(/<\?xml.*?\?>\s*/,"");
+		//	.replace(/&lt;/g,"<").replace(/&gt;/g,">");
 }
 
 

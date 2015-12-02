@@ -35,8 +35,21 @@ var sendText = function(data) {
 
 
 
-exports.retext = function(callback) {
-	text = callback;
+exports.retext = function(callback,defaultText) {
+	if(typeof callback === "function")
+	{
+		text = callback;
+		return;
+	}
+	if(typeof callback === "object")
+	{
+		text =  function(ok,req,res,result) {
+			if(result.content in callback)
+				res.sendText(callback[result.content]);
+			else
+				res.sendText(defaultText);
+		}
+	}
 };
 exports.redefaultMsg = function(callback) {
 	defaultMsg = callback;
