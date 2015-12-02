@@ -22,10 +22,13 @@ var wechatapp = new wechat(app, 'wx2d99e56a3326b348', 'd4624c36b6795d1d99dcf0547
 // 	console.log(result);
 // });
 wechatapp.use("postData");
-wechatapp.retext(function(ok,req,res,result) {
-	console.log(result);
-	res.sendText("nihaoya");
-});
-
+// wechatapp.retext(function(ok,req,res,result) {
+// 	console.log(result);
+// 	res.sendText("nihaoya");
+// });
+wechatapp.retext({
+	'你好':'你也好',
+	我们 : '我们怎么了'
+},'什么');
 
 app.listen(8080);
