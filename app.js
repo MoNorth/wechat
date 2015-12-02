@@ -23,7 +23,7 @@ var wechatapp = new wechat(app, 'wx2d99e56a3326b348', 'd4624c36b6795d1d99dcf0547
 // });
 wechatapp.use("postData");
 wechatapp.retext(function(ok,req,res,result) {
-	console.log("lsll");
+	console.log(result);
 	res.sendText("nihaoya");
 });
 
