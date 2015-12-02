@@ -36,7 +36,8 @@ wechatapp.retext({
 		wechatapp.createSession(result,function(req,res,result) {
 			if(result.content === "你好")
 				res.sendText("我一点也不好");
-		})
+		});
+		res.sendText("请在此输入");
 	}
 },'什么');
 
