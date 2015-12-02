@@ -22,8 +22,8 @@ var defaultMsg = function(ok, req, res, result) {
 
 var sendText = function(data) {
 	var result = {
-		ToUserName : this.result.tousername,
-		FromUserName : this.result.fromusername,
+		ToUserName : this.result.fromusername,
+		FromUserName : this.result.tousername,
 		CreateTime : Math.floor((new Date()).getTime()/1000),
 		MsgType : 'text',
 		Content : data
