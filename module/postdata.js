@@ -28,7 +28,6 @@ var sendText = function(data) {
 		MsgType : 'text',
 		Content : data
 	};
-	result = tool.addCDATA(result);
 	var resultstr = tool.jsonToXml(result);
 	console.log(resultstr);
 	this.send(resultstr);
