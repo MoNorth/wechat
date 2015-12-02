@@ -36,6 +36,8 @@ wechatapp.retext({
 		wechatapp.createSession(result,function(req,res,result) {
 			if(result.content === "你好")
 				res.sendText("我一点也不好");
+			else
+				res.sendText("输错利润");
 		});
 		res.sendText("请在此输入");
 	}

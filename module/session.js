@@ -23,7 +23,7 @@ var createSession = function(result,callback) {
 
 var hasSession = function(req,res) {
 	var result = res.result;
-	if(result in session)
+	if(result.fromusername in session)
 	{
 		if(session[result].time > Math.floor((new Date()).getTime()/1000))
 		{
