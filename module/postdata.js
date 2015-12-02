@@ -91,7 +91,7 @@ function getPost(req, res, next) {
 	res.sendText = sendText;
 	if(config.session)
 	{
-		if(require("./session").hasSession())
+		if(require("./session").hasSession(req,res))
 			return;
 	}
 	switch (data.msgtype) {
