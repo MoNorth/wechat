@@ -25,10 +25,10 @@ var hasSession = function(req,res) {
 	var result = res.result;
 	if(result.fromusername in session)
 	{
-		if(session[result].time > Math.floor((new Date()).getTime()/1000))
+		if(session[result.fromusername].time > Math.floor((new Date()).getTime()/1000))
 		{
-			session[result].callback.call(this,req,res,result);
-			session[result].time -= time;
+			session[result.fromusername].callback.call(this,req,res,result);
+			session[result.fromusername].time -= time;
 			return true;
 		}
 	}
