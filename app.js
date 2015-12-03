@@ -44,18 +44,30 @@ wechatapp.retext({
 },'什么');
 
 
-wechatapp.reclick(function(ok,req,res,result) {
-	switch(result.eventkey)
-	{
-		case 'V1001_GOOD':
-			res.sendText("点赞");
-			break;
-		case 'V1001_TODAY_MUSIC':
-			res.sendText("歌曲啊");
-		default:
-			res.sendText("什么啊");
-	}
-})
+// wechatapp.reclick(function(ok,req,res,result) {
+// 	switch(result.eventkey)
+// 	{
+// 		case 'V1001_GOOD':
+// 			res.sendText("点赞");
+// 			break;
+// 		case 'V1001_TODAY_MUSIC':
+// 			res.sendText("歌曲啊");
+// 		default:
+// 			res.sendText("什么啊");
+// 	}
+// })
+wechatapp.reclick({
+	'V1001_GOOD':
+		function(req,res,result) {
+			wechatapp.createSession(result,function(req,res,result) {
+				if(result.content === "so")
+					res.sendText("so too");
+				else
+					res.sendText("too");
+			});
+			res.sendText("请在此输入");
+		}
+},"点了歌曲");
 
 
 // console.log(config.session);
