@@ -15,6 +15,12 @@ var text = function(ok, req, res, result) {
 	res.send("");
 }
 
+
+var click = function(ok,req,res,result) {
+	console.log("click");
+	res.send("");
+}
+
 var defaultMsg = function(ok, req, res, result) {
 	console.log(result);
 	res.send("");
@@ -64,6 +70,36 @@ exports.retext = function(callback,defaultText) {
 		}
 	}
 };
+
+
+exports.reclick = function(callback,defaultText) {
+	if(typeof callback === "function")
+	{
+		click = callback;
+		return;
+	}
+	if(typeof callback === "object")
+	{
+		click =  function(ok,req,res,result) {
+			if(result.content in callback)
+			{
+				if(typeof callback[result.content] === "function")
+				{
+					callback[result.content].call(this,req,res,result);
+				}
+				else if(typeof callback[result.content] === "string")
+					res.sendText(callback[result.content]);
+			}
+			else
+				if(typeof defaultText === "function")
+					defaultText.call(this,req,res,result);
+				else if(typeof defaultText === "string")
+					res.sendText(defaultText);
+		}
+	}
+}
+
+
 exports.redefaultMsg = function(callback) {
 	defaultMsg = callback;
 };
