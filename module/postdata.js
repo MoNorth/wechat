@@ -76,7 +76,7 @@ var events = function(ok,req,res,result) {
 			click(ok,req,res,result);
 			break;
 		default:
-			res.send("");
+			defaultMsg(ok, req, res, result);
 	}
 }
 
