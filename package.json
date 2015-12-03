@@ -1,6 +1,6 @@
 {
   "name": "wechat-node",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "基于nodejs-express的微信模块",
   "main": "index.js",
   "dependencies": {
