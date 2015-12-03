@@ -1,10 +1,29 @@
 {
-  "name": "wechat",
-  "version": "0.0.1",
-  "description": "wechat-node",
+  "name": "wechat-node",
+  "version": "1.0.0",
+  "description": "基于nodejs-express的微信模块",
+  "main": "index.js",
   "dependencies": {
-    "express": "4.13.1",
+    "express": "^4.13.1",
     "express-xml-bodyparser": "^0.2.2",
     "request": "^2.67.0"
-  }
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoNorth/wechat.git"
+  },
+  "keywords": [
+    "wechat-node",
+    "wechat"
+  ],
+  "author": "MoNorth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MoNorth/wechat/issues"
+  },
+  "homepage": "https://github.com/MoNorth/wechat#readme"
 }
