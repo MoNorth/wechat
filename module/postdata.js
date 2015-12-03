@@ -51,6 +51,9 @@ var sendNews = function(data) {
 			item : data
 		}
 	}
+	var resultstr = tool.jsonToXml(result);
+	console.log(resultstr);
+	this.send(resultstr);
 }
 
 
