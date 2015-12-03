@@ -12,18 +12,18 @@ var tool = require("./tool");
 
 var text = function(ok, req, res, result) {
 	console.log("text");
-	res.sendText(" ");
+	res.send("");
 }
 
 
 var click = function(ok,req,res,result) {
 	console.log("click");
-	res.sendText(" ");
+	res.send("");
 }
 
 var defaultMsg = function(ok, req, res, result) {
 	console.log(result);
-	res.sendText(" ");
+	res.send("");
 }
 
 var sendText = function(data) {

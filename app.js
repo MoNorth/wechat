@@ -44,6 +44,20 @@ wechatapp.retext({
 },'什么');
 
 
+wechat.reclick(function(ok,req,res,result) {
+	switch(result.eventkey)
+	{
+		case 'V1001_GOOD':
+			res.sendText("点赞");
+			break;
+		case 'V1001_TODAY_MUSIC':
+			res.sendText("歌曲啊");
+		default:
+			res.sendText("什么啊");
+	}
+})
+
+
 // console.log(config.session);
 
 app.listen(8080);
