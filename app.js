@@ -29,7 +29,14 @@ wechatapp.use("postData");
 // 
 wechatapp.use("session");
 wechatapp.retext({
-	'你好':'你也好',
+	'你好':[
+		{
+			Title : "lalal",
+			Description : "描述啦啦啦",
+			PicUrl : "http://mat1.gtimg.com/www/images/qq2012/qqlogo_1x.png",
+			Url : "http://www.qq.com/"
+		}
+	],
 	我们 : '我们怎么了',
 	你妈逼 : '你个傻逼',
 	hello : function(req,res,result) {

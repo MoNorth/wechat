@@ -35,8 +35,22 @@ var sendText = function(data) {
 		Content : data
 	};
 	var resultstr = tool.jsonToXml(result);
-	console.log(resultstr);
+	// console.log(resultstr);
 	this.send(resultstr);
+}
+
+
+var sendNews = function(data) {
+	var result = {
+		ToUserName : this.result.fromusername,
+		FromUserName : this.result.tousername,
+		CreateTime : Math.floor((new Date()).getTime()/1000),
+		MsgType : 'news',
+		ArticleCount : data.length,
+		Articles : {
+			item : data
+		}
+	}
 }
 
 
@@ -71,12 +85,16 @@ exports.retext = function(callback,defaultText) {
 				}
 				else if(typeof callback[result.content] === "string")
 					res.sendText(callback[result.content]);
+				else if(typeof callback[result.content] === "object")
+					res.sendNews(callback[result.content]);
 			}
 			else
 				if(typeof defaultText === "function")
 					defaultText.call(this,req,res,result);
 				else if(typeof defaultText === "string")
 					res.sendText(defaultText);
+				else if(typeof defaultText === "object")
+					res.sendNews(defaultText);
 		}
 	}
 };
@@ -99,12 +117,16 @@ exports.reclick = function(callback,defaultText) {
 				}
 				else if(typeof callback[result.eventkey] === "string")
 					res.sendText(callback[result.eventkey]);
+				else if(typeof callback[result.eventkey] === "object")
+					res.sendNews(callback[result.eventkey]);
 			}
 			else
 				if(typeof defaultText === "function")
 					defaultText.call(this,req,res,result);
 				else if(typeof defaultText === "string")
 					res.sendText(defaultText);
+				else if(typeof defaultText === "object")
+					res.sendNews(defaultText);
 		}
 	}
 }
@@ -133,6 +155,7 @@ function getPost(req, res, next) {
 	}
 	res.result = data;
 	res.sendText = sendText;
+	res.sendNews = sendNews;
 	if(config.session)
 	{
 		if(require("./session").hasSession(req,res))
