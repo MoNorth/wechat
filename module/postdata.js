@@ -41,6 +41,18 @@ var sendText = function(data) {
 
 
 var sendNews = function(data) {
+	if(!data.length || typeof data.length != "number")
+	{
+		this.send("");
+		console.log("输入图文信息错误");
+		return;
+	}
+	if(data.length > 10)
+	{
+		this.send("");
+		console.log("输入图文信息过长");
+		return;
+	}
 	var result = {
 		ToUserName : this.result.fromusername,
 		FromUserName : this.result.tousername,
@@ -69,6 +81,27 @@ var events = function(ok,req,res,result) {
 }
 
 
+var switchdata = function(sdata,req,res,result,callback,defaultText) {
+	if(sdata in callback)
+			{
+				if(typeof callback[sdata] === "function")
+				{
+					callback[sdata].call(this,req,res,result);
+				}
+				else if(typeof callback[sdata] === "string")
+					res.sendText(callback[sdata]);
+				else if(typeof callback[sdata] === "object")
+					res.sendNews(callback[sdata]);
+			}
+			else
+				if(typeof defaultText === "function")
+					defaultText.call(this,req,res,result);
+				else if(typeof defaultText === "string")
+					res.sendText(defaultText);
+				else if(typeof defaultText === "object")
+					res.sendNews(defaultText);
+}
+
 
 
 exports.retext = function(callback,defaultText) {
@@ -80,24 +113,7 @@ exports.retext = function(callback,defaultText) {
 	if(typeof callback === "object")
 	{
 		text =  function(ok,req,res,result) {
-			if(result.content in callback)
-			{
-				if(typeof callback[result.content] === "function")
-				{
-					callback[result.content].call(this,req,res,result);
-				}
-				else if(typeof callback[result.content] === "string")
-					res.sendText(callback[result.content]);
-				else if(typeof callback[result.content] === "object")
-					res.sendNews(callback[result.content]);
-			}
-			else
-				if(typeof defaultText === "function")
-					defaultText.call(this,req,res,result);
-				else if(typeof defaultText === "string")
-					res.sendText(defaultText);
-				else if(typeof defaultText === "object")
-					res.sendNews(defaultText);
+			switchdata(result.content,req,res,result,callback,defaultText);
 		}
 	}
 };
@@ -112,24 +128,7 @@ exports.reclick = function(callback,defaultText) {
 	if(typeof callback === "object")
 	{
 		click =  function(ok,req,res,result) {
-			if(result.eventkey in callback)
-			{
-				if(typeof callback[result.eventkey] === "function")
-				{
-					callback[result.eventkey].call(this,req,res,result);
-				}
-				else if(typeof callback[result.eventkey] === "string")
-					res.sendText(callback[result.eventkey]);
-				else if(typeof callback[result.eventkey] === "object")
-					res.sendNews(callback[result.eventkey]);
-			}
-			else
-				if(typeof defaultText === "function")
-					defaultText.call(this,req,res,result);
-				else if(typeof defaultText === "string")
-					res.sendText(defaultText);
-				else if(typeof defaultText === "object")
-					res.sendNews(defaultText);
+			switchdata(result.eventkey,req,res,result,callback,defaultText);
 		}
 	}
 }
