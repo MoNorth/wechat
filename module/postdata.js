@@ -40,6 +40,16 @@ var sendText = function(data) {
 }
 
 
+var events = function(ok,req,res,result) {
+	switch(result.event)
+	{
+		case 'CLICK':
+			click(ok,req,res,result);
+			break;
+		default:
+			res.send("");
+	}
+}
 
 
 
@@ -81,14 +91,14 @@ exports.reclick = function(callback,defaultText) {
 	if(typeof callback === "object")
 	{
 		click =  function(ok,req,res,result) {
-			if(result.content in callback)
+			if(result.eventkey in callback)
 			{
-				if(typeof callback[result.content] === "function")
+				if(typeof callback[result.eventkey] === "function")
 				{
-					callback[result.content].call(this,req,res,result);
+					callback[result.eventkey].call(this,req,res,result);
 				}
-				else if(typeof callback[result.content] === "string")
-					res.sendText(callback[result.content]);
+				else if(typeof callback[result.eventkey] === "string")
+					res.sendText(callback[result.eventkey]);
 			}
 			else
 				if(typeof defaultText === "function")
@@ -131,6 +141,9 @@ function getPost(req, res, next) {
 	switch (data.msgtype) {
 		case 'text':
 			text(true, req, res, data);
+			break;
+		case 'event':
+			events(true,req,res,data);
 			break;
 		default:
 			defaultMsg(true, req, res, data);
