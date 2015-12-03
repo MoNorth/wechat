@@ -44,7 +44,7 @@ wechatapp.retext({
 },'什么');
 
 
-wechat.reclick(function(ok,req,res,result) {
+wechatapp.reclick(function(ok,req,res,result) {
 	switch(result.eventkey)
 	{
 		case 'V1001_GOOD':
