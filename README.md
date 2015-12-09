@@ -219,7 +219,7 @@ wechat.redefaultMsg(function(ok,req,res,result)
 wechat.retext({
       "下午好" : function(req,res,result)
                 {
-                  wechat.createSession(result,function(req,res,result)
+                  wechat_node.createSession(result,function(req,res,result)
                     {
                       /**
                        * 这个函数是用来进行用户携session访问下会触发的函数.就是用户二次访问时的处理,可以进行二次session叠加.
@@ -236,7 +236,33 @@ wechat.retext({
 ```javascript
 wechat.setTime(5000);//参数为秒数.
 ```
+#### 客服消息(主动推送文本消息)
+首先引入`active`模块
 
+```javascript
+wechat.use("active");
+```
+然后有两种发送模式,一种是给一个用户发送消息
+
+```javascript
+wechat_node.avtive("openID","YOUR MESSAGE",function(ok,result){
+    /**
+     * 参数 openID 为所要发送的用户的openID
+     * 你的代码
+     * ok 为是否成功
+     * result 为错误信息
+     */
+  })
+```
+第二种是给多人发送消息
+
+```javascript
+wechat_node.avtive([openID1,openID2,openID3,...],"YOUR MESSAGE",function(ok,result){
+    /**
+     * 参数 openID 为所要发送的用户的openID的数组
+     */
+  })
+```
 ### 其他函数
 这里还有别的函数方便大家的使用,我简单介绍一下
 #### 获取access_token
