@@ -39,7 +39,12 @@ function use (fun_name,callback) {
 		case 'session':
 		{
 			var session = require("./session");
-			extend(wechat.prototype,session);
+			extend(wechat,session);
+		}
+		case 'active' : 
+		{
+			var active = require("./active");
+			extend(wechat,active);
 		}
 	}
 }
